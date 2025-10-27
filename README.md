@@ -53,8 +53,8 @@ Exports a clean .txt wordlist (one entry per line).
 ⚙ Installation
 
 # clone repo
-git clone https://github.com/naveen-patil/password-strength-analyzer.git
-cd password-strength-analyzer
+git clone https://[github.com/naveen-patil/password-strength-analyzer.git](https://github.com/InfoNaveen/Password_Strength_Analyzer.git)
+cd Password_Strength_Analyzer
 
 # install dependencies
 pip install -r requirements.txt
