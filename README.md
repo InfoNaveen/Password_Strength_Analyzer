@@ -207,7 +207,8 @@ Email: naveen.a.patil.best.123@gmail.com
 
 📦 Clone & Get Started (one-liner)
 
-git clone https://github.com/naveen-patil/password-strength-analyzer.git && cd password-strength-analyzer && pip install -r requirements.txt
+git clone https://github.com/naveen-patil/Password_Strength_Analyzer.git && cd password_strength_analyzer && pip install -r requirements.txt
+
 
 
 
