@@ -1,214 +1,89 @@
-🔐 Password Strength Analyzer & Smart Wordlist Generator
+# 🔐 Password Strength Analyzer & Smart Wordlist Generator
 
 > ⚡ A Python-powered cybersecurity tool built in a 4-hour sprint — analyze password strength with zxcvbn and craft custom attack-ready wordlists from target-specific keywords.
 
+![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-🚀 Quick Links & Badges
+A compact, dual-purpose command-line utility for password auditing and security research. It analyzes password strength and generates highly customized wordlists for ethical hacking and penetration testing.
 
+---
 
-✨ What it does
+## 🧠 Features
 
-A compact dual-purpose utility for:
+* **Password Analyzer (analyze):**
+    * Rates passwords on a score of 0 (Very Weak) to 4 (Very Strong).
+    * Provides estimated crack times for both online and offline attack models.
+    * Gives actionable warnings and suggestions from zxcvbn.
 
-Password analysis (strength score 0–4, crack time estimates, warnings & suggestions).
+* **Wordlist Generator (generate):**
+    * Takes personal keywords (names, pets, dates) as input.
+    * Generates permutations with uppercase, lowercase, and leetspeak.
+    * Appends/prepends number ranges (like years) and common symbols.
+    * Exports a clean .txt wordlist for tools like Hashcat or John the Ripper.
 
-Custom wordlist generation from user-provided keywords (names, pets, dates, nicknames) with permutations, leetspeak, numeric ranges, and symbol affixes — exported as .txt for use in tools like Hashcat, John the Ripper, or Hydra.
+* *Secure & Efficient:*
+    * *Path Traversal Protection:* Sanitizes all file outputs to prevent writing outside the project directory.
+    * *Memory Safe:* Streams generated wordlists directly to disk, allowing for massive lists to be created without crashing from RAM exhaustion.
 
+---
 
+## ⚙ Installation
 
-
-
-🧠 Features
-
-🔎 Password Analyzer (analyze)
-
-Score: 0 (Very Weak) → 4 (Very Strong).
-
-Estimated crack times for both online and offline attack models.
-
-Actionable warnings and suggestions to harden passwords.
-
-
-🧰 Wordlist Generator (generate)
-
-Input personal keywords (e.g., naveen, patil, football, 2004).
-
-Generate permutations with:
-
-Uppercase / lowercase variations
-
-Leetspeak substitutions (a → @, e → 3, i → 1, o → 0, s → $)
-
-Numeric suffixes/prefixes and year ranges (e.g., 1990–2025)
-
-Common symbols appended/prepended (!, #, @, $)
-
-
-Exports a clean .txt wordlist (one entry per line).
-
-
-
-
-
-⚙ Installation
-
-# clone repo
-git clone https://[github.com/naveen-patil/password-strength-analyzer.git](https://github.com/InfoNaveen/Password_Strength_Analyzer.git)
+```bash
+# 1. Clone the repository
+git clone [https://github.com/InfoNaveen/Password_Strength_Analyzer.git](https://github.com/InfoNaveen/Password_Strength_Analyzer.git)
 cd Password_Strength_Analyzer
 
-# install dependencies
+# 2. Install dependencies from requirements.txt
 pip install -r requirements.txt
-
-> requirements.txt (example)
-
-
-
-zxcvbn
-
-(If your project uses a different zxcvbn package name, ensure the correct package is listed — e.g., zxcvbn-python.)
-
-
 
 
 🚀 Usage
+The tool is run from the command line using main.py and has two commands: analyze and generate.
+1. Analyze a Password
+Use the analyze command with the required --password flag.
+python3 main.py analyze --password "Password123!"
 
-🧩 Analyze Password Strength
+Example Output:
+--- Password Analysis ---
+Password: *************
+Strength Score: 3/4 (Strong)
+Time to crack (offline, fast hash): 4 months
+Time to crack (online, throttle): 5 centuries
 
-python main.py analyze
+Suggestions:
+- Add another word or two. Uncommon words are better.
+--- End of Analysis ---
 
-Follow the prompt to input a password. Output includes:
+2. Generate a Wordlist
+Use the generate command with the required --keywords flag.
+# Example: Generate a list from keywords "Naveen", "Buddy", "1999"
+python3 main.py generate --keywords "Naveen" "Buddy" "1999"
 
-Strength score (0–4)
+# Example: Specify an output file and a different year range
+python3 main.py generate --keywords "Naveen" "Buddy" --start-year 2000 --end-year 2024 --output naveen_list.txt
 
-Crack time estimates
+Example Output:
+Generating wordlist based on: ['Naveen', 'Buddy', '1999']
 
-Warnings & suggestions
+✅ Success! Wordlist saved to 'wordlist.txt'
+Total passwords generated: 746
 
-
-🧠 Generate Wordlist
-
-python main.py generate
-
-Follow prompts to enter keywords, numeric ranges, and symbols. Result is saved to wordlist_<timestamp>.txt in the project folder.
-
-
-
-
-📂 Example Outputs
-
-Wordlist sample
-
-naveen
-Naveen
-n@veen
-N@V33N2024
-patil!99
-patil#2004
-
-Analysis sample
-
-Password: Naveen@2024
-Score: 3 (Strong)
-Estimated Crack Time (Online): months
-Estimated Crack Time (Offline): years
-Suggestions: Add more length and unique symbols; avoid common patterns
-
-
-
-
-🧾 Project Structure (suggested)
-
-password-strength-analyzer/
-├─ main.py              # CLI entrypoint (analyze / generate)
-├─ analyzer.py          # zxcvbn wrapper & formatting helpers
-├─ generator.py         # permutation & export logic
-├─ requirements.txt
-├─ README.md
-└─ LICENSE
-
-
-
+(Total count may vary based on generation logic)
+📂 Project Structure
+Password_Strength_Analyzer/
+├── main.py                 # Main CLI entrypoint (using argparse)
+├── password_analyzer.py    # Contains analyze_password() logic
+├── wordlist_generator.py   # Contains generate_wordlist() logic
+├── requirements.txt        # Project dependencies (zxcvbn)
+└── README.md
 
 🧑‍💻 Tech Stack
-
-Python 3.x
-
-zxcvbn — password strength estimator
-
-Standard libraries: itertools, random, datetime, argparse
-
-
-
-
-
-✅ Use Cases
-
-Ethical hacking / red teaming (wordlist tailoring)
-
-Password hygiene training & demos
-
-Security research into human-chosen passwords
-
-Learning tool for students of cybersecurity
-
-
-
-
-
-🌟 Future Enhancements
-
-GUI (Streamlit / Tkinter) for easier use
-
-Check passwords against breach databases (Have I Been Pwned API)
-
-Hybrid dictionary + controlled brute force generation modes
-
-Multi-language support and larger permutation templates
-
-
-
-
-
-🤝 Contributing
-
-Contributions welcome!
-
-1. Fork it 🔱
-
-
-2. Create a feature branch git checkout -b feat/awesome
-
-
-3. Commit your changes git commit -m "feat: add awesome feature"
-
-
-4. Push git push origin feat/awesome and open a PR
-
-
-
-
-
-
+ * Python 3.x
+ * zxcvbn: For industry-standard password strength estimation.
+ * argparse: For building the robust command-line interface.
+ * os: For secure, cross-platform path handling.
+ * datetime: For calculating the default current year.
 📝 License
-
-This repository is licensed under the MIT License — use responsibly for ethical and educational purposes only.
-
-
-
-
-🔗 Author & Contact (GitHub-ready)
-
-Naveen Patil
-GitHub: https://github.com/naveen-patil
-Email: naveen.a.patil.best.123@gmail.com
-
-
-
-
-📦 Clone & Get Started (one-liner)
-
-git clone https://github.com/naveen-patil/Password_Strength_Analyzer.git && cd password_strength_analyzer && pip install -r requirements.txt
-
-
-
-
+This project is licensed under the MIT License.
