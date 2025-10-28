@@ -4,6 +4,7 @@
 
 ![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
+Example : https://drive.google.com/file/d/1NXUNFl6zPW9uf4TAbn73YBQ_Mzjvzzxe/view?usp=drivesdk
 
 A compact, dual-purpose command-line utility for password auditing and security research. It analyzes password strength and generates highly customized wordlists for ethical hacking and penetration testing.
 
